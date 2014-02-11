@@ -143,7 +143,7 @@ Rational Rational::operator+(const Rational &obj)
 		else
 		{
 			//Set numerator and denominator to temps
-			numerator=tempNum;
+			numerator=tempNum;//swashing the m data in o=m+n
 			denominator=tempDenom;			
 		}
 		//Create temps and simplify
