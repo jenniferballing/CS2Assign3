@@ -1,26 +1,9 @@
 #include"Rational.h"
 
-//test for each of the commented sections in .cpp
-//needs to handle b=2+a and b=a+2 2.(addition(a))(outside function using +=) check rectangle
-//prefix and postfix do the same thing postfix needs const
-
 int main ()
 {
 	double pause;
 	
-	/*Rational one(2, 4);
-	Rational two(2, 5);
-
-	if(one==two)
-	{
-		cout<<"TRUE";
-	}
-	else
-	{
-		cout<<"FALSE";
-	}*/
-
-
 	//Overloaded Constructors
 	cout<<"Overloaded Constructors:"<<endl;
 	Rational a;
@@ -94,25 +77,37 @@ int main ()
 	cout<<"(\"3/8\") += (\"1/2\"): "<<s2<<endl;
 
 	//Relational operators
-	cout<"Relational Operators: "<<endl;
+	cout<<"Relational Operators: "<<endl;
 	if(m==n)
 	{
 		cout<<"m==n"<<endl;
 	}
+	else
+	{
+		cout<<"m is not equal to n"<<endl;
+	}
+	if(m>n)
+	{
+		cout<<"m is greater than n"<<endl;
+	}
+	else
+	{
+		cout<<"m is not greater than n"<<endl; 
+	}
 
-	
-	/*Rational c=2+b;//Angry
-	Rational d=a+3;//Fine
-	cout<<"c"<<c<<endl;
-	cout<<"d"<<d<<endl;
-
+	cout<<"a: "<<a<<endl;
+	cout<<"b: "<<b<<endl;
 	for(int i=0; i<4; i++)
 	{
-		cout<<"a++"<<a++<<endl;
-		cout<<"++b"<<++b<<endl;
-	}*/
+		cout<<"a++: "<<a++<<endl;
+		cout<<"++b: "<<++b<<endl;
+	}
 
-	cout<<"Enter a value: ";
+	//Double conversion function
+	Rational doubl(4,5);
+	double doub=double(doubl);
+	cout<<"double conversion of (4/5): "<<doub<<endl;
+
 	cin>> pause;
 }
 	
