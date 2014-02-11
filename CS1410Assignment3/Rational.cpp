@@ -28,6 +28,8 @@ Rational::Rational(int N, int D)
 Rational::Rational(string W)
 {
 	inWords = W;
+	numerator = 0;
+	denominator = 1;
 }
 
 //Copy Constructor
@@ -239,64 +241,59 @@ Rational Rational::operator+(string W)
 	ss>>num;
 	ss.ignore();
 	ss>>denom;
-	cout<<"parsed W-numerator: "<<num<<endl;
-	cout<<"parsed W-denominator: "<<denom<<endl;
-
+	
 	//parse inWords
 	stringstream s2(inWords);
 	s2>>inum;
 	s2.ignore();
 	s2>>idenom;
-	cout<<"parsed inWords-numerator: "<<inum<<endl;
-	cout<<"parsed inWords-denominator: "<<idenom<<endl;
 	
-	//initiallized with int
-	if(inWords!="0/")
+	
+	//initiallized with string
+	if(numerator ==0)
 	{
-		cout<<"!!!!!!!!!!!!!!!!!!!!!"<<endl;
-
 		//Multiply by denominators
 		inum*=denom;
-		idenom*=denom;
+		num*=idenom;
 		inum+=num;
-		numerator=inum;
-		denominator=idenom;
 
-		cout<<"numerator: "<<numerator<<endl;
-		cout<<"denominator: "<<denominator<<endl;
-
+		idenom*=denom;
+		
 		//Create temps and simplify
-		int& tempNum=numerator;
-		int& tempDenom=denominator;
+		int& tempNum=inum;
+		int& tempDenom=idenom;
 		Simplify(tempNum, tempDenom);
-
-		cout<<"simplified numerator: "<<numerator<<endl;
-		cout<<"simplified denominator: "<<denominator<<endl;
 
 		//Put back into a string
 		stringstream st;
-		st<<numerator<<"/"<<denominator;
-		inWords=st.str();	
-		cout<<"inWords: "<<inWords<<endl;				
+		st<<inum<<"/"<<idenom;
+		string str=st.str();	
+		Rational c(str);
+		return c;
 	}
 	
-	//initiallized with string
+	//initiallized with int
 	else 
 	{
-		//Multiply by denominators
-		numerator*=denom;
-		numerator+=num;
-		denominator*=denom;
-
-		cout<<"str numerator: "<<numerator<<endl;
-		cout<<"str denominator: "<<denominator<<endl;
+		int tempNum=0;
 		
+		//Multiply by denominators
+		num*=denominator;
+		
+		tempNum=numerator*denom;
+		num+=tempNum;
+
+		denom*=denominator;
+		
+
 		//Create temps and simplify
-		int& tempNumerator=numerator;
-		int& tempDenominator=denominator;
+		int& tempNumerator=num;
+		int& tempDenominator=denom;
 		Simplify(tempNumerator, tempDenominator);
+
+		Rational c(num, denom);
+		return c;
 	}
-	return *this;
 }
 
 //Overloaded Compound Assignment Operators

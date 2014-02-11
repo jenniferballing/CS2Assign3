@@ -8,13 +8,6 @@ int main ()
 {
 	double pause;
 	
-	/*Rational temp("1/2");
-	Rational temp2(1,2);
-	temp= temp+string("1/2");
-	cout<<"temp: "<<temp<<endl;
-	temp2= temp2+string("1/2");
-	cout<<"temp2: "<<temp2<<endl;*/
-
 	/*Rational one(2, 4);
 	Rational two(2, 5);
 
@@ -99,6 +92,13 @@ int main ()
 	cout<<"(3,8) += (\"1/2\"): "<<s<<endl;
 	s2+=string("1/2");
 	cout<<"(\"3/8\") += (\"1/2\"): "<<s2<<endl;
+
+	//Relational operators
+	cout<"Relational Operators: "<<endl;
+	if(m==n)
+	{
+		cout<<"m==n"<<endl;
+	}
 
 	
 	/*Rational c=2+b;//Angry
