@@ -182,26 +182,30 @@ Rational Rational::operator+(const Rational &obj)
 
 		stringstream s2;
 		s2<<tempNumerator<<"/"<<tempDenominator;
-		inWords=s2.str();
+		string str = s2.str();
+		//inWords=s2.str();
 
-		Rational b(inWords);
+		Rational b(str);
 		return b;
 	}			
 }
 Rational Rational::operator+(int N)
 {
-	int num=0, denom=0, newNum=0;
+	int num=0, denom=0, newNum=0, tempN=0, tempD=0;
 	if(numerator>0)
 	{
 		//Convert int to a fraction over denom
 		N*=denominator;
-		numerator+=N;
+		tempN=numerator+N;
+		tempD=denominator;
 
 		//Create temps and simplify
-		int& tempNum=numerator;
-		int& tempDenom=denominator;
-
-		Simplify(tempNum, tempDenom);	
+		int& tempNum=tempN;
+		int& tempDenom=tempD;
+		
+		Simplify(tempNum, tempDenom);
+		Rational a(tempN, tempD);
+		return a;
 	}
 	else
 	{
@@ -212,12 +216,19 @@ Rational Rational::operator+(int N)
 		
 		newNum=denom*N;
 		newNum+=num;
-		
+
+		int& tempNum=newNum;
+		int& tempDenom=denom;
+
+		Simplify(tempNum, tempDenom);
+				
 		stringstream s2;
 		s2<<newNum<<"/"<<denom;
-		inWords=s2.str();	
+		string str = s2.str();	
+
+		Rational b(str);
+		return b;
 	}	
-	return *this;
 }
 Rational Rational::operator+(string W)
 {

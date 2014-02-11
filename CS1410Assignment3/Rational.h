@@ -70,7 +70,7 @@ class Rational
 
 		//Insertion and Extraction
 		void Cout (ostream & out);
-		friend Rational operator+(int lhs, Rational &rhs);
+		//friend Rational operator+(int lhs, Rational &rhs);
 		friend ostream &operator<<(ostream &strm, Rational &obj);
 		friend istream &operator >> (istream &strm, Rational &obj);
 
@@ -81,6 +81,6 @@ class Rational
 //Outside Overloaded Functions
 ostream &operator<<(ostream &strm, Rational &obj);
 istream &operator>>(istream &strm, Rational &obj);
-Rational operator+(int lhs, Rational &rhs);
+//Rational operator+(int lhs, Rational &rhs);
 #endif
 
