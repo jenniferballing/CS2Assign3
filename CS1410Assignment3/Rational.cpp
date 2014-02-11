@@ -62,7 +62,7 @@ Rational& Rational::operator= (const Rational &rhs)
 }
 Rational& Rational::operator= (const int N)
 {
-	int num=0,denom=1;
+	int numer=0,denomin=1;
 	if(numerator>0)
 	{
 		numerator= N;
@@ -71,18 +71,18 @@ Rational& Rational::operator= (const int N)
 	else 
 	{
 		//Parse inWords
-		stringstream ss(inWords);
-		ss>>num;
+		/*stringstream ss(inWords);
+		ss>>numerator;
 		ss.ignore();
-		ss>>denom;
+		ss>>denominator;*/
 
 		//Set numerator and denominator
-		num=N;
-		denom=1;
+		//numerator=N;
+		denominator=1;
 
 		//Put back into a string
 		stringstream s2;
-		s2<<num<<"/"<<denom;
+		s2<<N<<"/"<<denominator;
 		inWords=s2.str();
 	}	
 	return *this;
@@ -143,13 +143,15 @@ Rational Rational::operator+(const Rational &obj)
 		else
 		{
 			//Set numerator and denominator to temps
-			numerator=tempNum;
-			denominator=tempDenom;			
+			//numerator=tempNum;
+			//denominator=tempDenom;			
 		}
 		//Create temps and simplify
-		int& tempNumerator=numerator;
-		int& tempDenominator=denominator;
+		int& tempNumerator=tempNum;
+		int& tempDenominator=tempDenom;
 		Simplify(tempNumerator, tempDenominator);
+		Rational a(tempNumerator, tempDenominator);
+		return a;
 	}
 	//Initiallized with a string
 	else
@@ -166,22 +168,25 @@ Rational Rational::operator+(const Rational &obj)
 		sr.ignore();
 		sr>>objtempDenom;
 		
-		numerator=tempNum*objtempDenom;
-		numerator+=(objtempNum*tempDenom);
-		denominator=tempDenom*objtempDenom;
+		tempNum*=objtempDenom;
+		objtempNum*=tempDenom;
+		tempNum+=objtempNum;
+		tempDenom*=objtempDenom;
+		//numerator+=(objtempNum*tempDenom);
+		//denominator=tempDenom*objtempDenom;
 
 		//Create temps and simplify
-		int& tempNumerator=numerator;
-		int& tempDenominator=denominator;
+		int& tempNumerator=tempNum; //numerator;
+		int& tempDenominator=tempDenom;//denominator;
 		Simplify(tempNumerator, tempDenominator);
 
 		stringstream s2;
-		s2<<numerator;
-		s2<<"/";
-		s2<<denominator;
+		s2<<tempNumerator<<"/"<<tempDenominator;
 		inWords=s2.str();
-	}
-	return *this;			
+
+		Rational b(inWords);
+		return b;
+	}			
 }
 Rational Rational::operator+(int N)
 {
@@ -439,3 +444,46 @@ istream &operator>> (istream &strm, Rational &obj)
 Rational::~Rational(void)
 {
 }
+
+/*Rational operator+(int lhs, Rational &rhs)
+{
+	cout << "Inside the overloading + operator -- Outside of the class " << endl ;
+	int newNum, newDenom, num, denom;
+
+	//Add the integer and the Rational object
+	if(rhs.inWords=="/0")
+	{		
+		lhs*=rhs.denominator;
+		newNum= rhs.numerator+lhs;
+		newDenom=rhs.denominator;
+
+		int &tempNum=newNum;
+		int &tempDenom=newDenom;
+
+		rhs.Simplify (tempNum, tempDenom);
+		Rational a(tempNum, tempDenom);
+		
+		return a;
+	}
+	else 
+	{
+		stringstream ss(rhs.inWords);
+		ss>>num;
+		ss.ignore();
+		ss>>denom;
+
+		lhs*=denom;
+		num+=lhs;
+
+		int &tempNum=num;
+		int &tempDenom=denom;
+
+		rhs.Simplify (tempNum, tempDenom);
+		stringstream sr;
+		sr<<tempNum<<"/"<<tempDenom;
+		rhs.inWords=sr.str();
+
+		Rational b(rhs.inWords);
+		return b;
+	}
+}*/
